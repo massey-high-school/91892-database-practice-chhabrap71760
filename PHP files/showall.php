@@ -119,8 +119,21 @@
                 ?>
                 
                <!--- / Price -->
+            
+                <p>
+                    <! Developer, Gnere and Age... -->
+                    <b>Developer:</b> <?php echo $find_rs['DevName'] ?><br />
+                    <b>Genre:</b> <?php echo $find_rs['Genre'] ?><br />
+                    suitable for ages <b><?php echo $find_rs['Age Rating'] ?>
+                    </b> and up
+                    
+                </p>
                 
-            </div>  <!-- / results -->
+                <p>
+                    <i><?php echo $find_rs['Description'] ?</i>
+                </p>
+                
+                </div>  <!-- / results -->
             
             <br />
             
