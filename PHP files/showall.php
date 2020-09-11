@@ -1,9 +1,10 @@
   <?php include("topbit.php");
 
     $find_sql = "SELECT * FROM `L2_DB_Prac_Game_Details` 
-    JOIN L2_DB_Prac_Genre ON (L2_DB_Prac_Game_Details.GenreID = L2_DB_Prac_Genre.GenreID)
-    JOIN L2_DB_Prac_Developer ON (L2_DB_Prac_Game_Details.DeveloperID = L2_DB_Prac_developer.DeveloperID)
-
+JOIN `L2_DB_Prac_Genre` ON (`L2_DB_Prac_Genre`.`GenreID` = `L2_DB_Prac_Game_Details`.`GenreID`)
+JOIN `L2_DB_Prac_Developer` ON (`L2_DB_Prac_Developer`.`ID` =
+`L2_DB_Prac_Game_Details`.`ID`)
+ 
     ";
     $find_query = mysqli_query($dbconnect, $find_sql);
     $find_rs = mysqli_fetch_assoc($find_query);
@@ -33,7 +34,7 @@
             
             else {
                 do
-                }
+                {   
             
                     ?>
             
@@ -52,7 +53,7 @@
                     </div> <!-- / Title -->
                     
                     <?php
-                        if($find_rs['Subtitle']) != "") 
+                        if($find_rs['Subtitle'] != "") 
                         
                         {
                         
@@ -82,13 +83,15 @@
                     https://codepen.io/bluetidepro/pen/GkpEa -->
                     <div class="star-ratings-sprite">
                             <span style="width:<?php echo $find_rs['User 
-                            Rating'] / 5 * 100; ?>%" class="star-ratings-                sprite-rating"></span>
+                            Rating'] / 5 * 100; ?>%" class="star-ratings-
+                            sprite-rating"></span>
                     
                     </div> <!-- / star rating div -->
                     
                         <div class="actual-rating">
-                            (<?php echo $find_rs['User Rating'] ?> based 
-                            on <?php echo number_format($find_rs['Rating Count'] ?> ratings)
+                            (<?php echo $find_rs['User Rating'] ?> based on <?
+                            php echo number_format($find_rs['Rating Count']) ?> 
+                            ratings)
                             
                     </div> <!-- / text rating div -->
                     
@@ -100,6 +103,7 @@
                 
                 <?php
                 
+                    
                     if($find_rs['Price'] == 0) {
                         ?>
                     <p>Free!</p>
@@ -121,16 +125,16 @@
                <!--- / Price -->
             
                 <p>
-                    <! Developer, Gnere and Age... -->
+                    <! Developer, Genre and Age... -->
                     <b>Developer:</b> <?php echo $find_rs['DevName'] ?><br />
                     <b>Genre:</b> <?php echo $find_rs['Genre'] ?><br />
-                    suitable for ages <b><?php echo $find_rs['Age Rating'] ?>
+                    suitable for ages <b><?php echo $find_rs['Age'] ?>
                     </b> and up
                     
                 </p>
                 
                 <p>
-                    <i><?php echo $find_rs['Description'] ?</i>
+                    <i><?php echo $find_rs['Description'] ?></i>
                 </p>
                 
                 </div>  <!-- / results -->
