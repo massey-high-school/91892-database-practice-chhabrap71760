@@ -2,6 +2,15 @@
 
     $name_dev = $_POST['dev_name'];
 
+// Cost Code (to handle when cost is not specified...)
+if ($cost=="") {
+    $cost_op = ">=";
+    $cost = 0;
+}
+else {
+    $cost_op = "<=";    
+}
+
 // In App Purchases...
 if (isset($_POST['in_app'])) {
     $in_app = 0;    
@@ -16,9 +25,8 @@ $rating_more_less = mysqli_real_escape_string($dbconnect),
 $_POST['rate_more_less']);
 $rating = mysqli_real_escape_string($dbconnect, $_POST['rating']);
 
-if ($rating_more_less == "at least") {
-    $rate_op = ">=";    
-}
+if($rating == "") {$rating = 0;
+                  ($rating_more_less == "at least";}
 
 elseif($rating_more_less == "at most") {
     $rate_op = "<=";    
@@ -26,10 +34,27 @@ elseif($rating_more_less == "at most") {
 
 else {
     $rate_op = "<=";
-    $rating = 0;
     
 } // end rating if / elseif / else
 
+// Age ....
+$age_more_less = mysqli_real_escape_string($dbconnect),
+$_POST['age_more_less']);
+$age = mysqli_real_escape_string($dbconnect, $_POST['age']);
+
+if ($age_more_less == "at least") {
+    $age_op = ">=";    
+}
+
+elseif($age_more_less == "at most") {
+    $age_op = "<=";    
+}
+
+else {
+    $age_op = "<=";H
+    $age = 0;
+    
+} // end rating if / elseif / else
 
 $find_sql = "SELECT * FROM `L2_DB_Prac_Game_Details` 
 JOIN `L2_DB_Prac_Genre` ON (`L2_DB_Prac_Genre`.`GenreID` = `L2_DB_Prac_Game_Details`.`GenreID`)
@@ -38,8 +63,10 @@ JOIN `L2_DB_Prac_Developer` ON (`L2_DB_Prac_Developer`.`ID` =
  WHERE `Name` LIKE '%$app_name%' 
  AND `DevName` LIKE '%$developer%'
  AND `Genre` LIKE '%$genre%'
- AND `Price` <= '$cost'
+ AND `Price` <= '$cost_op' '$cost'
  AND (`In App` = $in_app OR `In App` = 0)
+ And `User Rating` $rate_op $rating
+ AND `Age` $age_op $age
 
 ";
     $find_query = mysqli_query($dbconnect, $find_sql);
